@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beny Shopping</title>
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4}
+header{background:#111;color:white;padding:20px;text-align:center}
+.search{padding:12px;width:80%;margin:15px auto;display:block}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:15px}
+.card{background:white;padding:12px;border-radius:10px;text-align:center}
+.card img{width:100%;height:140px;object-fit:cover}
+button{background:#008cff;color:white;border:0;padding:10px;border-radius:5px}
+.price{color:green;font-weight:bold}
+</style>
+</head>
+<body><header>
+<h1>BENY SHOPPING</h1>
+<p>Welcome to Online Shopping</p>
+</header><input class="search" placeholder="Search products..." oninput="search(this.value)"><div class="products" id="products"></div><script>
+let items=[
+{name:"T-Shirt",price:299,img:"https://placehold.co/300x200?text=T-Shirt"},
+{name:"Shoes",price:799,img:"https://placehold.co/300x200?text=Shoes"},
+{name:"Watch",price:499,img:"https://placehold.co/300x200?text=Watch"},
+{name:"Headphones",price:599,img:"https://placehold.co/300x200?text=Headphones"}
+];
+
+function show(list){
+document.getElementById("products").innerHTML=list.map(p=>`
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+<p class="price">₹${p.price}</p>
+<button onclick="order('${p.name}',${p.price})">Order Now</button>
+</div>`).join("");
+}
+
+function search(value){
+show(items.filter(p=>p.name.toLowerCase().includes(value.toLowerCase())));
+}
+
+function order(name,price){
+alert("You selected "+name+" for ₹"+price+". Contact the shop to order.");
+}
+
+show(items);
+</script></body>
+</html>
